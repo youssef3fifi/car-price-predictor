@@ -58,7 +58,7 @@ with st.sidebar:
     st.info("هذا النظام يعتمد على خوارزمية **XGBoost** لتوقع أسعار السيارات المستعملة بدقة عالية بناءً على مواصفاتها.")
     st.markdown("---")
     st.markdown("👨‍💻 **فريق العمل:**")
-    st.markdown("- Youssef Mohamed\n-Mahmoud Shawky\n-Anne-Marei Josaph\n-Malak Mahmoud\n-Yara Mustafa")
+    st.markdown("- Youssef Mohamed\n- Mahmoud Shawky\n- Anne-Marei Josaph\n- Malak Mahmoud\n- Yara Mustafa")
 
 # ==========================================
 # 5. واجهة المستخدم الرئيسية (UI)
@@ -127,10 +127,28 @@ if predict_btn:
                 
         input_data = input_data[model_columns]
         
-        prediction = model.predict(input_data)[0]
+        # التوقع بالروبية (ده اللي طالع من الموديل أساساً)
+        prediction_inr = model.predict(input_data)[0]
         
-        # عرض النتيجة جوه الكارت الأخضر اللي صممناه بالـ CSS
-        st.markdown(f'<div class="result-card">💰 السعر المتوقع: {prediction:,.0f} روبية (INR)</div>', unsafe_allow_html=True)
+        # أسعار الصرف التقريبية
+        inr_to_usd = 0.012  # الروبية بتعمل حوالي 0.012 دولار
+        inr_to_egp = 0.57   # الروبية بتعمل حوالي 0.57 جنيه مصري
+        
+        # تحويل العملات بالضرب في سعر الصرف
+        prediction_usd = prediction_inr * inr_to_usd
+        prediction_egp = prediction_inr * inr_to_egp
+        
+        # عرض النتيجة بالتلات عملات جوه الكارت الأخضر اللي صممناه بالـ CSS
+        st.markdown(f"""
+            <div class="result-card">
+                💰 السعر المتوقع:
+                <hr style="margin: 10px 0; border-color: rgba(255,255,255,0.2);">
+                <div style="font-size: 22px; margin-bottom: 5px;">🇮🇳 {prediction_inr:,.0f} روبية هندية</div>
+                <div style="font-size: 26px; margin-bottom: 5px; color: #f1c40f;">🇺🇸 {prediction_usd:,.0f} دولار أمريكي</div>
+                <div style="font-size: 32px; font-weight: 900; color: #fff;">🇪🇬 {prediction_egp:,.0f} جنيه مصري</div>
+            </div>
+        """, unsafe_allow_html=True)
+        
         st.balloons()
         
     except Exception as e:
