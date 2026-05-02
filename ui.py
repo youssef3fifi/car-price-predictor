@@ -7,8 +7,6 @@ import seaborn as sns
 import shap
 from fpdf import FPDF
 
-# منع التحذيرات بتاعة مكتبات الرسم
-st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # 1. إعداد شكل الصفحة
 st.set_page_config(page_title="Car Price Predictor", page_icon="🏎️", layout="wide")
