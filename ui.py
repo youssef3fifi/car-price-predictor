@@ -58,7 +58,7 @@ with st.sidebar:
     st.info("هذا النظام يعتمد على خوارزمية **XGBoost** لتوقع أسعار السيارات المستعملة بدقة عالية بناءً على مواصفاتها.")
     st.markdown("---")
     st.markdown("👨‍💻 **فريق العمل:**")
-    st.markdown("- Youssef Mohamed\n- Mahmoud Shawky\n- Anne-Marei Josaph\n- Malak Mahmoud\n- Yara Mustafa")
+    st.markdown("- Youssef Mohamed\n- Mahmoud Shawky\n- Anne-Marie Josaph\n- Malak Mahmoud\n- Yara Mustafa")
 
 # ==========================================
 # 5. واجهة المستخدم الرئيسية (UI)
